@@ -1,10 +1,6 @@
 <template>
   <div :style="{background: backgroundColor}">
-    <Header
-      :chosenColor="chosenColor"
-      :colors="colors"
-    />
-    <beautiful-chat 
+    <beautiful-chat
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :close="closeChat"
       :colors="colors"
@@ -96,31 +92,25 @@
       :onMessage="sendMessage"
       :onTyping="handleTyping"
     />
-    <Footer
-      :chosenColor="chosenColor"
-      :colors="colors"
-    />
   </div>
 </template>
 
 <script>
+
 import messageHistory from './messageHistory'
 import chatParticipants from './chatProfiles'
-import Header from './Header.vue'
-import Footer from './Footer.vue'
+
 import TestArea from './TestArea.vue'
 import availableColors from './colors'
 
 export default {
   name: 'app',
   components: {
-    Header,
-    Footer,
     TestArea
   },
   data() {
     return {
-      participants: chatParticipants,
+      participants: [],
       titleImageUrl:
         'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
       messageList: messageHistory,
@@ -136,7 +126,19 @@ export default {
     }
   },
   created() {
-    this.setColor('blue')
+    this.setColor('blue');
+    this.participants = [
+      {
+        id: 'mattmezza',
+        name: 'Matteo',
+        imageUrl: 'https://avatars3.githubusercontent.com/u/1915989?s=230&v=4'
+      },
+      {
+        id: 'support',
+        name: 'Support',
+        imageUrl: 'https://avatars3.githubusercontent.com/u/37018832?s=200&v=4'
+      }
+    ]
   },
   methods: {
     sendMessage(text) {
